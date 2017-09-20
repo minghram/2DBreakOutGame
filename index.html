@@ -26,17 +26,25 @@ var paddleX = (canvas.width-paddleWidth)/2;
 var rightPressed = false;
 var leftPressed = false;
 
-function draw() {
+function draw() {              //Execute game & invoke our ball and paddle
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   drawPaddle();
   x += dx;
   y += dy;
 
-  if (y + dy > canvas.height -5 || y + dy < 5) {
+  if (y + dy < 5) {              //Bounce off walls & game over condition
     dy = -dy;
     randomColor();
+} else if (y + dy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy;
+    }
+  else  {
+    alert ("Game Over");
+    document.location.reload();
 }
+} 
   if (x + dx > canvas.width -5 || x + dx < 5) {
     dx = -dx;
     randomColor();
